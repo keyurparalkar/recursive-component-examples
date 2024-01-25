@@ -3,6 +3,8 @@
 //     name: string;
 // }
 
+import styled from "styled-components";
+
 // export type Tree = {
 //     id: string;
 //     name: string;
@@ -13,11 +15,28 @@ type RecursiveTreeProps = {
   tree: any;
 };
 
+const StyledUnorderedList = styled.ul`
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul {
+    margin-left: 1rem;
+  }
+
+  details summary {
+    text-align: left;
+  }
+`;
+
 const RecursiveTree = (props: RecursiveTreeProps) => {
   const { tree } = props;
 
   return (
-    <ul>
+    <StyledUnorderedList>
       {tree?.children &&
         tree.children.map((item) => (
           <li key={`key-${item.id}`}>
@@ -27,7 +46,7 @@ const RecursiveTree = (props: RecursiveTreeProps) => {
             </details>
           </li>
         ))}
-    </ul>
+    </StyledUnorderedList>
   );
 };
 

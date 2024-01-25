@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import "./App.css";
 import RecursiveTree from "./components/RecursiveTree";
 
@@ -32,11 +33,38 @@ const tree = {
   ],
 };
 
+const StyledGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr min(200px);
+  color: white;
+  text-align: center;
+
+
+  & .heading {
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
+`;
+
+const StyledContainer = styled.div`
+  min-width: 200px;
+`;
+
 function App() {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <RecursiveTree tree={tree} />
-    </div>
+    <StyledGrid>
+      <h1 className="heading">Recursive Component Examples</h1>
+      <StyledContainer>
+        <RecursiveTree tree={tree} />
+      </StyledContainer>
+      <StyledContainer>
+        <RecursiveTree tree={tree} />
+      </StyledContainer>
+      <StyledContainer>
+        <RecursiveTree tree={tree} />
+      </StyledContainer>
+    </StyledGrid>
   );
 }
 
