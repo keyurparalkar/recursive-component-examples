@@ -9,7 +9,7 @@
 // }
 
 type RecursiveTreeProps = {
-  //TODO(Keyur): Create Typings for this recurring object
+  //TODO(Keyur): Create Typings for this recurring object, with decriminators
   tree: any;
 };
 
