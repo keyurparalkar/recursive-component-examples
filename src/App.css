@@ -9,8 +9,12 @@
     padding: 0;
   }
 
-  details {
-    margin-left: 4rem;
+  ul {
+    margin-left: 1rem;
+  }
+
+  details summary {
+    text-align: left;
   }
 }
 
