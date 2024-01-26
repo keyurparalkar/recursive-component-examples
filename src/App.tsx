@@ -1,14 +1,48 @@
 import styled from "styled-components";
+import { FaBeer } from "react-icons/fa";
+
 import "./App.css";
 import RecursiveTree from "./components/RecursiveTree";
 
-const tree = {
+const tree1 = {
   id: "Parent 1",
   name: "Parent 1",
   children: [
     {
       id: "Child-1",
       name: "Child-1",
+      children: [
+        {
+          id: "Inner-Child-1",
+          name: "Inner-Child-1",
+          children: [
+            {
+              id: "Inner-Inner-Child-1",
+              name: "Inner-Inner-Child-1",
+            },
+          ],
+        },
+        {
+          id: "Inner-Child-2",
+          name: "Inner-Child-2",
+        },
+      ],
+    },
+    {
+      id: "Child-2",
+      name: "Child-2",
+    },
+  ],
+};
+
+const tree2 = {
+  id: "Parent 1",
+  name: "Parent 1",
+  children: [
+    {
+      id: "Child-1",
+      name: "Child-1",
+      icon: FaBeer,
       children: [
         {
           id: "Inner-Child-1",
@@ -40,7 +74,6 @@ const StyledGrid = styled.div`
   color: white;
   text-align: center;
 
-
   & .heading {
     grid-column-start: 1;
     grid-column-end: 4;
@@ -56,13 +89,13 @@ function App() {
     <StyledGrid>
       <h1 className="heading">Recursive Component Examples</h1>
       <StyledContainer>
-        <RecursiveTree tree={tree} />
+        <RecursiveTree tree={tree1} />
       </StyledContainer>
       <StyledContainer>
-        <RecursiveTree tree={tree} />
+        <RecursiveTree tree={tree2} />
       </StyledContainer>
       <StyledContainer>
-        <RecursiveTree tree={tree} />
+        <RecursiveTree tree={tree1} />
       </StyledContainer>
     </StyledGrid>
   );
