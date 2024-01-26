@@ -1,18 +1,13 @@
-// export type Node = {
-//     id: string;
-//     name: string;
-// }
-
 import styled from "styled-components";
 
-// export type Tree = {
-//     id: string;
-//     name: string;
-// }
+type Tree = {
+  id: string;
+  name: string;
+  children?: Tree[];
+};
 
 type RecursiveTreeProps = {
-  //TODO(Keyur): Create Typings for this recurring object, with decriminators
-  tree: any;
+  tree: Tree;
 };
 
 const StyledUnorderedList = styled.ul`
