@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaBeer } from "react-icons/fa";
+import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 
 import "./App.css";
 import RecursiveTree from "./components/RecursiveTree";
@@ -42,11 +42,12 @@ const tree2 = {
     {
       id: "Child-1",
       name: "Child-1",
-      icon: FaBeer,
+      icon: [CiSquarePlus, CiSquareMinus],
       children: [
         {
           id: "Inner-Child-1",
           name: "Inner-Child-1",
+          icon: [CiSquarePlus, CiSquareMinus],
           children: [
             {
               id: "Inner-Inner-Child-1",

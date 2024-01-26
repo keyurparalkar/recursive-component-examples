@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { IconType } from "react-icons/lib";
+import { ElementRef, useRef } from "react";
 
 type Tree = {
   id: string;
   name: string;
-  icon?: IconType;
+  icon?: IconType[];
   children?: Tree[];
 };
 
@@ -23,9 +24,9 @@ type RecursiveTreeProps = {
  * OR
  * ---- icon: Tree['icon']
  */
-type DetailsProps = {
-  icon: Tree["icon"];
-};
+// type DetailsProps = {
+//   icon: Tree["icon"];
+// };
 
 const StyledUnorderedList = styled.ul`
   ul,
@@ -40,25 +41,50 @@ const StyledUnorderedList = styled.ul`
   }
 `;
 
-const StyledDetails = styled.details<DetailsProps>`
+const StyledDetails = styled.details`
   & summary {
     text-align: left;
-    ${(props) => props.icon && "list-style: none;"}
+  }
+
+  & summary.custom-icon {
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+    & span {
+      margin-left: 0.525rem;
+    }
   }
 `;
 
 const RecursiveTree = (props: RecursiveTreeProps) => {
   const { tree } = props;
+  const detailsRef = useRef<ElementRef<"details">>(null);
+
+  // TODO(Keyur): Make this cleaner
+  let OpenIcon: IconType, CloseIcon: IconType;
+  if (tree.icon) {
+    OpenIcon = tree.icon[0];
+    CloseIcon = tree.icon[1];
+  }
 
   return (
     <StyledUnorderedList>
       {tree?.children &&
         tree.children.map((item) => (
           <li key={`key-${item.id}`}>
-            <StyledDetails icon={item.icon}>
-              <summary>
-                {item.icon && <item.icon />}
-                {item.name}
+            <StyledDetails ref={detailsRef}>
+              <summary
+                className={item.icon?.length ? "custom-icon" : "default-icon"}
+              >
+                {OpenIcon &&
+                  CloseIcon &&
+                  (detailsRef.current?.open ? (
+                    <OpenIcon size={25} />
+                  ) : (
+                    <CloseIcon size={25} />
+                  ))}
+                <span>{item.name}</span>
               </summary>
               <RecursiveTree tree={item} />
             </StyledDetails>
