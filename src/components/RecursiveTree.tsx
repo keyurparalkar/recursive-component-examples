@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { ElementRef, ReactElement, useRef, useState } from "react";
-import { NativeTarget } from "styled-components/dist/types";
 
 type Tree = {
   id: string;
