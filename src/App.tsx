@@ -52,18 +52,21 @@ const tree2 = {
             {
               id: "Inner-Inner-Child-1",
               name: "Inner-Inner-Child-1",
+              icons: [<CiSquarePlus size={25} />, <CiSquareMinus size={25} />],
             },
           ],
         },
         {
           id: "Inner-Child-2",
           name: "Inner-Child-2",
+          icons: [<CiSquarePlus size={25} />, <CiSquareMinus size={25} />],
         },
       ],
     },
     {
       id: "Child-2",
       name: "Child-2",
+      icons: [<CiSquarePlus size={25} />, <CiSquareMinus size={25} />],
     },
   ],
 };

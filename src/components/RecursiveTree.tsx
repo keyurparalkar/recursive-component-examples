@@ -49,7 +49,7 @@ const StyledDetails = styled.details`
     text-align: left;
   }
 
-  & summary.custom-icon {
+  & summary.custom-icons {
     display: flex;
     align-items: center;
     list-style: none;
@@ -65,6 +65,8 @@ const CustomDetails = (props: CustomDetailsProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const detailsRef = useRef<ElementRef<"details">>(null);
 
+  const hasIcons = icons && icons.length > 0;
+
   const handleDrawerOpen = (
     e: React.SyntheticEvent<HTMLDetailsElement, ToggleEvent>
   ) => {
@@ -75,8 +77,8 @@ const CustomDetails = (props: CustomDetailsProps) => {
 
   return (
     <StyledDetails onToggle={handleDrawerOpen} ref={detailsRef}>
-      <summary>
-        {icons && (isOpen ? icons[1] : icons[0])}
+      <summary className={hasIcons ? "custom-icons" : undefined}>
+        {hasIcons && (isOpen ? icons[1] : icons[0])}
         <span>{name}</span>
       </summary>
       {renderTree}
