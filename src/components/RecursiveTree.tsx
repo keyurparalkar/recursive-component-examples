@@ -40,7 +40,25 @@ const StyledUnorderedList = styled.ul`
   }
 
   ul {
-    margin-left: 1rem;
+    margin-left: 0.8rem;
+  }
+
+  details ul {
+    padding-left: 0.625rem;
+    border-left: 2px dashed white;
+  }
+
+  details ul li {
+    position: relative;
+    &::before {
+      content: "--";
+      display: block;
+      height: 20px;
+      width: 13px;
+      /* border: 2px solid red; */
+      position: absolute;
+      left: -1.5%;
+    }
   }
 `;
 
