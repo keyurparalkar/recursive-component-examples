@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { IconType } from "react-icons/lib";
-import { ElementRef, useRef } from "react";
+import { ElementRef, ReactElement, useRef, useState } from "react";
+import { NativeTarget } from "styled-components/dist/types";
 
 type Tree = {
   id: string;
   name: string;
-  icon?: IconType[];
+  icons?: JSX.Element[];
   children?: Tree[];
 };
 
@@ -27,6 +27,10 @@ type RecursiveTreeProps = {
 // type DetailsProps = {
 //   icon: Tree["icon"];
 // };
+
+interface CustomDetailsProps extends Omit<Tree, "id"> {
+  renderTree: ReactElement;
+}
 
 const StyledUnorderedList = styled.ul`
   ul,
@@ -57,37 +61,43 @@ const StyledDetails = styled.details`
   }
 `;
 
-const RecursiveTree = (props: RecursiveTreeProps) => {
-  const { tree } = props;
+const CustomDetails = (props: CustomDetailsProps) => {
+  const { icons, name, renderTree } = props;
+  const [isOpen, setIsOpen] = useState(false);
   const detailsRef = useRef<ElementRef<"details">>(null);
 
-  // TODO(Keyur): Make this cleaner
-  let OpenIcon: IconType, CloseIcon: IconType;
-  if (tree.icon) {
-    OpenIcon = tree.icon[0];
-    CloseIcon = tree.icon[1];
-  }
+  const handleDrawerOpen = (
+    e: React.SyntheticEvent<HTMLDetailsElement, ToggleEvent>
+  ) => {
+    if (e.target === detailsRef.current) {
+      setIsOpen(e.nativeEvent.newState === "open" ? true : false);
+    }
+  };
+
+  return (
+    <StyledDetails onToggle={handleDrawerOpen} ref={detailsRef}>
+      <summary>
+        {icons && (isOpen ? icons[1] : icons[0])}
+        <span>{name}</span>
+      </summary>
+      {renderTree}
+    </StyledDetails>
+  );
+};
+
+const RecursiveTree = (props: RecursiveTreeProps) => {
+  const { tree } = props;
 
   return (
     <StyledUnorderedList>
       {tree?.children &&
         tree.children.map((item) => (
           <li key={`key-${item.id}`}>
-            <StyledDetails ref={detailsRef}>
-              <summary
-                className={item.icon?.length ? "custom-icon" : "default-icon"}
-              >
-                {OpenIcon &&
-                  CloseIcon &&
-                  (detailsRef.current?.open ? (
-                    <OpenIcon size={25} />
-                  ) : (
-                    <CloseIcon size={25} />
-                  ))}
-                <span>{item.name}</span>
-              </summary>
-              <RecursiveTree tree={item} />
-            </StyledDetails>
+            <CustomDetails
+              icons={item.icons}
+              name={item.name}
+              renderTree={<RecursiveTree tree={item} />}
+            />
           </li>
         ))}
     </StyledUnorderedList>
