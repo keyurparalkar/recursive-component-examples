@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ElementRef, ReactElement, useRef, useState } from "react";
+import { ReactElement, useState } from "react";
 
 type Tree = {
   id: string;
@@ -63,20 +63,19 @@ const StyledDetails = styled.details`
 const CustomDetails = (props: CustomDetailsProps) => {
   const { icons, name, renderTree } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const detailsRef = useRef<ElementRef<"details">>(null);
 
   const hasIcons = icons && icons.length > 0;
 
   const handleDrawerOpen = (
     e: React.SyntheticEvent<HTMLDetailsElement, ToggleEvent>
   ) => {
-    if (e.target === detailsRef.current) {
-      setIsOpen(e.nativeEvent.newState === "open" ? true : false);
-    }
+    // This stops event bubbling;
+    e.stopPropagation();
+    setIsOpen(e.nativeEvent.newState === "open" ? true : false);
   };
 
   return (
-    <StyledDetails onToggle={handleDrawerOpen} ref={detailsRef}>
+    <StyledDetails onToggle={handleDrawerOpen}>
       <summary className={hasIcons ? "custom-icons" : undefined}>
         {hasIcons && (isOpen ? icons[1] : icons[0])}
         <span>{name}</span>
