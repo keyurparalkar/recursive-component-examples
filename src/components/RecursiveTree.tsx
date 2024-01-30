@@ -42,27 +42,9 @@ const StyledUnorderedList = styled.ul`
   ul {
     margin-left: 0.8rem;
   }
-
-  details ul {
-    padding-left: 0.625rem;
-    border-left: 2px dashed white;
-  }
-
-  details ul li {
-    position: relative;
-    &::before {
-      content: "--";
-      display: block;
-      height: 20px;
-      width: 13px;
-      /* border: 2px solid red; */
-      position: absolute;
-      left: -1.5%;
-    }
-  }
 `;
 
-const StyledDetails = styled.details`
+const StyledDetails = styled.details<{ hasIcons: boolean | undefined }>`
   & summary {
     text-align: left;
   }
@@ -76,6 +58,29 @@ const StyledDetails = styled.details`
       margin-left: 0.525rem;
     }
   }
+
+  // Below styles are for the border around the details element ===================
+  ${(props) =>
+    props?.hasIcons &&
+    `
+        & ul {
+        padding-left: 0.625rem;
+        border-left: 2px dashed white;
+      }
+
+      & ul li {
+        position: relative;
+        &::before {
+          content: "--";
+          display: block;
+          height: 20px;
+          width: 13px;
+          /* border: 2px solid red; */
+          position: absolute;
+          left: -1.5%;
+        }
+      }
+  `}// ============================================================================
 `;
 
 const CustomDetails = (props: CustomDetailsProps) => {
@@ -93,7 +98,7 @@ const CustomDetails = (props: CustomDetailsProps) => {
   };
 
   return (
-    <StyledDetails onToggle={handleDrawerOpen}>
+    <StyledDetails onToggle={handleDrawerOpen} hasIcons={hasIcons}>
       <summary className={hasIcons ? "custom-icons" : undefined}>
         {hasIcons && (isOpen ? icons[1] : icons[0])}
         <span>{name}</span>
