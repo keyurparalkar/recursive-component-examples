@@ -19,6 +19,10 @@ const timelineData: PointProps[] = [
     year: 2002,
     text: "Test 5",
   },
+  {
+    year: 2006,
+    text: "Test 6",
+  }
 ];
 
 type PointProps = {
@@ -57,10 +61,24 @@ const DrawPoints = (props: DrawPointsProp) => {
   );
 };
 
+const Line = () => {
+  return (
+    <div
+      className="container-line"
+      style={{ position: "absolute", width: "100%", top: 0, zIndex: -10 }}
+    >
+      <svg viewBox="0 0 100 20">
+        <line x1={0} y1="90%" x2="100%" y2="90%" stroke="white" />
+      </svg>
+    </div>
+  );
+};
+
 const Timeline = () => {
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <DrawPoints pointers={timelineData} />
+      <Line />
     </div>
   );
 };
