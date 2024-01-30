@@ -86,6 +86,7 @@ const StyledGrid = styled.div`
 
 const StyledContainer = styled.div`
   min-width: 200px;
+  border: 2px dashed #cacaca52;
 `;
 
 function App() {
@@ -93,13 +94,12 @@ function App() {
     <StyledGrid>
       <h1 className="heading">Recursive Component Examples</h1>
       <StyledContainer>
+        <h2>Simple Tree</h2>
         <RecursiveTree tree={tree1} />
       </StyledContainer>
       <StyledContainer>
+        <h2>Tree with Custom Icons</h2>
         <RecursiveTree tree={tree2} />
-      </StyledContainer>
-      <StyledContainer>
-        <RecursiveTree tree={tree1} />
       </StyledContainer>
     </StyledGrid>
   );
