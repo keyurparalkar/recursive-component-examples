@@ -3,6 +3,7 @@ import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 
 import "./App.css";
 import RecursiveTree from "./components/RecursiveTree";
+import Timeline from "./components/Timeline";
 
 const tree1 = {
   id: "Parent 1",
@@ -100,6 +101,10 @@ function App() {
       <StyledContainer>
         <h2>Tree with Custom Icons</h2>
         <RecursiveTree tree={tree2} />
+      </StyledContainer>
+      <StyledContainer>
+        <h2>Timeline component</h2>
+        <Timeline />
       </StyledContainer>
     </StyledGrid>
   );
