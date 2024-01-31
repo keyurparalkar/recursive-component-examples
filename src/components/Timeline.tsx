@@ -65,7 +65,7 @@ const Line = () => {
   return (
     <div
       className="container-line"
-      style={{ position: "absolute", width: "100%", top: 0, zIndex: -10 }}
+      style={{ position: "absolute", width: "100%", top: -70, zIndex: -10 }}
     >
       <svg viewBox="0 0 100 20">
         <line x1={0} y1="90%" x2="100%" y2="90%" stroke="white" />
