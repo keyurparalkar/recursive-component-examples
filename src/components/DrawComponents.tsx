@@ -10,6 +10,7 @@ export type Tree = {
     width: number;
     height: number;
     backgroundColor: string;
+    borderRadius?: string;
   };
   type: ComponentType;
   children?: Tree[];
@@ -30,33 +31,27 @@ type DrawComponentProps = {
  */
 const StyledCanvas = styled.div`
   position: relative;
-  width: 100%;
-  /* height: 100%; */
   border: 2px solid white;
 `;
 
 const DrawComponent = (props: DrawComponentProps) => {
   const { tree } = props;
 
-  if (tree.type === ComponentType.DIV) {
+  if (tree.type !== ComponentType.CONTAINER) {
     return <div style={{ position: "absolute", ...tree.style }}></div>;
   }
 
   return (
-    <div style={{ position: "absolute", ...tree.style }}>
+    <StyledCanvas style={{ position: "relative", ...tree.style }}>
       {tree.children &&
         tree.children.map((child) => <DrawComponent tree={child} />)}
-    </div>
+    </StyledCanvas>
   );
 };
 
 const Canvas = (props: DrawComponentProps) => {
   const { tree } = props;
-  return (
-    <StyledCanvas className="canvas">
-      <DrawComponent tree={tree} />
-    </StyledCanvas>
-  );
+  return <DrawComponent tree={tree} />;
 };
 
 export default Canvas;
