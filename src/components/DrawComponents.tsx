@@ -44,7 +44,9 @@ const DrawComponent = (props: DrawComponentProps) => {
   return (
     <StyledCanvas style={{ position: "relative", ...tree.style }}>
       {tree.children &&
-        tree.children.map((child) => <DrawComponent tree={child} />)}
+        tree.children.map((child) => (
+          <DrawComponent key={`${child.name}-${child.id}`} tree={child} />
+        ))}
     </StyledCanvas>
   );
 };
