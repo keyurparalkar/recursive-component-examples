@@ -4,6 +4,8 @@ import { CiSquareMinus, CiSquarePlus } from "react-icons/ci";
 import "./App.css";
 import RecursiveTree from "./components/RecursiveTree";
 import Timeline from "./components/Timeline";
+import Canvas from "./components/DrawComponents";
+import { dataTree } from "./components/constants";
 
 const tree1 = {
   id: "Parent 1",
@@ -75,7 +77,7 @@ const tree2 = {
 const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr min(200px);
+  grid-template-rows: min(80px) 1fr 1fr;
   color: white;
   text-align: center;
 
@@ -88,6 +90,11 @@ const StyledGrid = styled.div`
 const StyledContainer = styled.div`
   min-width: 200px;
   border: 2px dashed #cacaca52;
+
+  &.custom {
+    display: grid;
+    grid-template-rows: min(50px) 1fr;
+  }
 `;
 
 function App() {
@@ -105,6 +112,10 @@ function App() {
       <StyledContainer>
         <h2>Timeline component</h2>
         <Timeline />
+      </StyledContainer>
+      <StyledContainer className="custom">
+        <h2>Timeline component</h2>
+        <Canvas tree={dataTree} />
       </StyledContainer>
     </StyledGrid>
   );
