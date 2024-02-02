@@ -114,7 +114,7 @@ function App() {
         <Timeline />
       </StyledContainer>
       <StyledContainer className="custom">
-        <h2>Timeline component</h2>
+        <h2>Draw Element component</h2>
         <Canvas tree={dataTree} />
       </StyledContainer>
     </StyledGrid>
